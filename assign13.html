@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This will be assignment #12</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assign08.css">
+
+
+
+</head>
+
+<body>
+  <!-- Form-->
+  <form id="mc" name="registration" onchange="calc()" action="assign13.php" method="POST">
+    <ul>
+      <li>
+        <h1>Register form</h1>
+      </li>
+      <li>
+        <label for="performance"> Select performance type:</label>
+        <select name="performance" id="performance" class="field" onchange="showElement()" autofocus required>
+          <option value="solo">Solo</option>
+          <option value="duet">Duet</option>
+          <option value="concerto">Concerto</option>
+        </select>
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <label for="first_name">First name:</label><br>
+        <input type="text" id="first_name" name="first_name" required minlength="1" class="field" pattern="[a-zA-Z]+" placeholder="Oleg">
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <label for="last_name">Last name:</label><br>
+        <input id="last_name" type="text" name="last_name" required class="field" pattern="[a-zA-Z]+" placeholder="Lasukov">
+        <span id=" err2"></span><br>
+      </li>
+      <li>
+        <label for="student_id">Student ID:</label><br>
+        <input id="student_id" type="text" name="student_id" required class="field" pattern="[0-9]+" placeholder="Only digits allowed">
+        <span id="err3"></span><br>
+      </li>
+      <li id="toHide">
+        <label for="first_name_2">Second student first name:</label><br>
+        <input type="text" id="first_name_2" name="first_name_2" autofocus required minlength="1" class="field" pattern="[a-zA-Z]+" placeholder="John">
+        <span id="err1"></span><br>
+      </li>
+      <li id="toHide">
+        <label for="last_name_2">Second student last name:</label><br>
+        <input id="last_name_2" type="text" name="last_name_2" required pattern="[a-zA-Z]+"
+          placeholder="Doe">
+        <span id="err2"></span><br>
+      </li>
+      <li id="toHide">
+        <label for="student_id_2">Second student student ID:</label><br>
+        <input id="student_id_2" type="text" name="student_id_2" required class="field" pattern="[0-9]+" placeholder="Only digits allowed">
+        <span id="err3"></span><br>
+      </li>
+      <li>
+        <p>Skill level:</p>
+
+        <input style="width: 20px;" type="radio" id="beginner" name="skill" class="field" checked>
+        <label style="float: none;" for="beginner">Beginner</label>
+        <br>
+
+        <input style="width: 20px;" type="radio" id="intermediate" name="skill">
+        <label style="float: none;" for="intermediate">Intermediate</label>
+        <br>
+
+        <input style="width: 20px;" type="radio" id="pre-advanced" name="skill">
+        <label style="float: none;" for="pre-advanced">Pre-advanced</label>
+        <br>
+
+        <input style="width: 20px;" type="radio" id="advanced" name="skill">
+        <label style="float: none;" for="advanced">Advanced</label>
+        <br>
+        <span id="err4"></span><br>
+      </li>
+      <li>
+        <p>Instrument:</p>
+        <div>
+          <input style="width: 20px;" type="radio" id="piano" name="instrument"  checked class="field hd" value="piano">
+          <label style="float: none;" for="piano">Piano</label>
+        </div>
+        <div>
+          <input style="width: 20px;" type="radio" id="voice" name="instrument" class="hd">
+          <label style="float: none;" for="voice">Voice</label>
+        </div>
+        <div>
+          <input style="width: 20px;" type="radio" id="string" name="instrument" class="hd">
+          <label style="float: none;" for="string">String</label>
+        </div>
+        <div>
+          <input style="width: 20px;" type="radio" id="organ" name="instrument" class="hd">
+          <label style="float: none;" for="organ">Organ</label>
+        </div>
+        <div>
+          <input style="width: 20px;" type="radio" id="other" name="instrument" onclick="showElement(this)" class="hd" value="other">
+          <label style="float: none;" for="other"id="other">Other</label>
+        </div>
+        <span id="err4"></span><br>
+      </li>
+      <li id="hideAgain">
+        <label for="other_2" >Specify the instrument:</label><br>
+        <input type="text" id="other_2" name="instrument"  autofocus required minlength="2" class="field" pattern="[a-zA-Z]+">
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location" autofocus required minlength="1" class="field" pattern="[a-zA-Z]+" placeholder="Use only letters">
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <label for="room">Room:</label><br>
+        <input type="text" id="room" name="room" autofocus required minlength="1" class="field" pattern="[0-9]+" >
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <label for="time_slot">Time slot:</label><br>
+        <input type="text" id="time_slot" name="time_slot" autofocus required minlength="1" class="field">
+        <span id="err1"></span><br>
+      </li>
+      <li>
+        <button type="submit" id="register"  onchange="calc()" onclick="makeRequest()">Register</button>
+        <button type="reset" id="register" >Reset</button>
+      </li>
+    </ul>
+    <div id="output"></div>
+  </form>
+
+
+<!-- //////////////////////JavaScript here/////////////////////////////////-->
+
+  <script>
+    
+    ///////////////////// Show and Hide function////////////////////////
+
+    $('li#toHide').css({'display': 'none', 'margin-bottom':"0px", 'padding':'0px'});
+    $('li#hideAgain').css({'display': 'none', 'margin-bottom':"0px", 'padding':'0px'});
+  
+          function showElement(node){
+        let performanceType = document.getElementById("performance").value;
+        let instruments = document.querySelectorAll('.hd').value;
+        if (performanceType == 'duet'){
+          $('li#toHide').css({'display': 'block', 'margin-bottom':"10px", 'padding':'12px', 'border-bottom': '1px solid #eee'});
+        }
+        if(node.value == 'other'){
+          $('li#hideAgain').css({'display': 'block', 'margin-bottom':"10px", 'padding':'12px', 'border-bottom': '1px solid #eee'});
+        }
+      }
+
+
+    var fields = document.querySelectorAll(".field");
+    var errors = document.querySelectorAll("span");
+
+ ////////////////////////////// Validation///////////////////////////////////
+    function calc() {
+     
+      for (let i = 0; fields.length; i++) {
+        if (!fields[i].checkValidity()) {
+          fields[i].focus();
+          errors[i].innerHTML = fields[i].validationMessage;
+          fields[i].classList.add('invalid');
+
+          break;
+        } else {
+          errors[i].innerHTML = "";
+        }
+
+      }
+
+
+      /////////////////////////////////////////////////////////////////////
+
+
+    }
+    function makeRequest() {
+        let output = document.getElementById('output');
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+
+
+          if (this.readyState == 4 && this.status == 200) {
+            prep(this.responseText);
+          }
+          else{
+            output.innerHTML = 'Something went wrong...'
+          }
+
+        };
+
+        
+        xhttp.open("POST", "assign13.php");
+        xhttp.send();
+
+
+      }
+    function prep(response) {
+    output.innerHTML = response; 
+        }
+    
+
+    
+  </script>
+</body>
+
+</html>

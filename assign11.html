@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This will be assignment #8</title>
+  <link rel="stylesheet" href="assign08.css">
+  <script>
+    function Reset() {
+
+      let errors = document.querySelectorAll('.error');
+      document.getElementById('total').innerHTML = "";
+      for (let i = 0; i < errors.length; i++) {
+        errors[i].innerHTML = "";
+      }
+    }
+
+    function result() {
+      var sum = 0;
+      var finalPrice = 0;
+      let b = parseInt(document.getElementById('iphone').value);
+      let a = parseInt(document.getElementById('tablet').value);
+      let m = parseInt(document.getElementById('laptop').value);
+      let w = parseInt(document.getElementById('gratitude').value);
+      let bs = b * 100;
+      let as = a * 150;
+      let ms = m * 500;
+      let ws = w * 1000;
+
+      let order = [bs, as, ms, ws];
+
+
+      for (let i = 0; i < order.length; i++) {
+        if (Number.isNaN(order[i]) == false) {
+
+          sum += (order[i]);
+
+        }
+      }
+      document.getElementById('total_').innerHTML = sum + '$';
+   
+
+    }
+
+  </script>
+
+</head>
+
+
+
+<body>
+  <div id="top_header">
+    <h1>Black<span id="heading">&Yellow</span></h1>
+  </div>
+  <form id="mc" name="form" action="assign11.php"  method="POST" onchange="validate()">
+    <ul>
+      <li>
+        <h1>Order list</h1>
+      </li>
+      <li>
+        <label for="first_name">First name:</label><br>
+        <input type="text" id="first_name" name="first_name" class='field' autofocus required>
+        <span id="err1" class="error"></span><br>
+      </li>
+      <li>
+        <label for="last_name">Last name:</label><br>
+        <input id="last_name" type="text" name="last_name" class='field' required>
+        <span id="err2" class="error"></span><br>
+      </li>
+      <li>
+        <label for="address">Address</label><br>
+        <input type="text" id="address" name="address" class='field' required>
+        <span id="err3" class="error"></span><br>
+      </li>
+      <li>
+        <label for="phone">Phone number</label><br />
+        <input id="phone" type="text" name="phone" class='field' required placeholder="208-XXX-XXXX" pattern="\d{3}[-]\d{3}[\-]\d{4}">
+        <span id="err4" class="error"></span><br>
+      </li>
+      <li>
+        <label for="iphone">IPhone(100$)</label><br />
+        <input id="iphone" type="number" name="item_01" class='field' required min="0" oninput="result()" >
+        <span id="err5" class="error"></span><br>
+      </li>
+      <li>
+        <label for="tablet">Tablet(150$)</label><br />
+        <input id="tablet" type="number" name="item_02" class='field' required min="0" oninput="result()">
+        <span id="err6" class="error"></span><br>
+      </li>
+      <li>
+        <label for="laptop">Laptop(500$)</label><br />
+        <input id="laptop" type="number" name="item_03" class='field' required min="0" oninput="result()">
+        <span id="err7" class="error"></span><br>
+      </li>
+      <li>
+        <label for="gratitude">Our gratitude(1000$)</label><br />
+        <input id="gratitude" type="number" name="item_04" class='field' required min="0" oninput="result()">
+        <span id="err8" class="error"></span><br>
+      </li>
+      <li>
+        <label  for="total_">Total:</label><br />
+        <output name="total_" id="total_"></output><br /><br>
+        
+      </li>
+
+
+      <li>
+        <h1>Payment details</h1>
+        <p>Select your credit card</p>
+      </li>
+<li>
+          <input style="width: 20px;" type="radio" id="visa" name="card" value="visa" checked="checked" class='field'
+            required onchange="validate()">
+          <label style="float: none;"  for="visa">Visa</label><br>
+          <input style="width: 20px;" type="radio" id="mastercard" name="card" value="mastercard">
+          <label style="float: none;"  for="mastercard">Mastercard</label><br>
+          <input style="width: 20px;" type="radio" id="americanExpress" name="card" value="americanExpress">
+          <label style="float: none;"  for="americanExpress">American Express</label>
+          <span id="err9" class="error"></span><br>
+     
+      </li>
+      <li>
+        <label for="credit_card">Credit Card # </label><br>
+        <input id="credit_card" name="credit_card" type="text" placeholder="0000 0000 0000 0000"
+          pattern="[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}" required maxlength="19">
+        <span id="err10" class="error"></span><br>
+        <br>
+      </li>
+      <li>
+        <label for="exp_date">Expiration date</label>
+        <input id="exp_date" type="text" name="exp_date" class='field' placeholder="00/0000" required
+          pattern="[0-9]{2}[/][0-9]{4}">
+        <span id="err11" class="error"></span><br>
+      </li>
+      <li>
+        <button id="function" type="submit">Send</button>
+        <button type="reset" id="reset" form="mc" onclick="Reset()">Reset</button>
+        
+      </li>
+    </ul>
+  </form>
+  
+
+
+  <script>
+function message(){
+  alert('Thank you!')
+}
+
+
+ let credit_card = document.getElementById('credit_card');
+ let exp_date = document.getElementById('exp_date');
+var n = 0;
+var d = 0;
+function Reset() {
+
+let errors = document.querySelectorAll('.error');
+document.getElementById('total').innerHTML = "";
+
+
+for (let i = 0; i < errors.length; i++) {
+  errors[i].innerHTML = "";
+}
+n = 0;
+}
+form.credit_card.onkeypress = function () {
+  let len = document.getElementById('credit_card').value;
+ 
+  if (len.length == 4) {
+
+    form.credit_card.value += " ";
+  } else if (len.length == 9) {
+    form.credit_card.value += " ";
+  } else if (len.length == 14) {
+    form.credit_card.value += " ";
+  }
+
+}
+
+
+
+
+        /*function*/
+    function validate() {
+      let form = document.getElementById('mc');
+      /*variables block*/
+      let first_name = document.getElementById('first_name');
+
+      let last_name = document.getElementById('last_name');
+      let address = document.getElementById('address');
+      let phone = document.getElementById('phone');
+
+      let iphone = document.getElementById('iphone');
+      let tablet = document.getElementById('tablet');
+      let laptop = document.getElementById('laptop');
+      let gratitude = document.getElementById('gratitude');
+      let paySystem = document.getElementById('visa');
+      let credit_card = document.getElementById('credit_card');
+      let exp_date = document.getElementById('exp_date');
+
+      /* Check for validity*/
+      if (!first_name.checkValidity()) {
+        document.getElementById("err1").innerHTML = first_name.validationMessage;
+        first_name.classList.add('invalid');
+        first_name.focus();
+
+      } else if (!last_name.checkValidity()) {
+        document.getElementById("err2").innerHTML = last_name.validationMessage;
+        last_name.classList.add('invalid');
+        last_name.focus();
+      } else if (!address.checkValidity()) {
+        document.getElementById("err3").innerHTML = address.validationMessage;
+        address.classList.add('invalid');
+        address.focus()
+
+      } else if (!phone.checkValidity()) {
+        document.getElementById("err4").innerHTML = phone.validationMessage;
+        phone.classList.add('invalid');
+        phone.focus();
+      } else if (!iphone.checkValidity()) {
+        document.getElementById("err5").innerHTML = iphone.validationMessage;
+        iphone.classList.add('invalid');
+        iphone.focus();
+      } else if (!tablet.checkValidity()) {
+        document.getElementById("err6").innerHTML = tablet.validationMessage;
+        tablet.classList.add('invalid');
+        tablet.focus();
+      } else if (!laptop.checkValidity()) {
+        document.getElementById("err7").innerHTML = laptop.validationMessage;
+        laptop.classList.add('invalid');
+        laptop.focus();
+      } else if (!gratitude.checkValidity()) {
+        document.getElementById("err8").innerHTML = gratitude.validationMessage;
+        gratitude.classList.add('invalid');
+        gratitude.focus();
+      } else if (!paySystem.checkValidity()) {
+        document.getElementById("err9").innerHTML = paySystem.validationMessage;
+        paySystem.classList.add('invalid');
+        paySystem.focus();
+      } else if (!credit_card.checkValidity()) {
+        document.getElementById("err10").innerHTML = credit_card.validationMessage;
+        credit_card.classList.add('invalid');
+        credit_card.focus();
+      } else if (!exp_date.checkValidity()) {
+        document.getElementById("err11").innerHTML = exp_date.validationMessage;
+        exp_date.classList.add('invalid');
+        exp_date.focus();
+      }
+
+    }
+  </script>
+
+
+</body>
+
+</html>
